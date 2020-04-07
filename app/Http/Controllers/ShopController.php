@@ -53,6 +53,7 @@ class ShopController extends Controller
         $product = Product::where('slug',$slug)->firstOrFail();
         $mightAlsoLike = Product::where('slug','!=',$slug)->inRandomOrder()->take(4)->get();
 
+        // * render product page
         return view('product',compact('product','mightAlsoLike'));
     }
 
