@@ -24,14 +24,29 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/', 'LandingPageController@index')->name('landing-page');
 Route::view('/shop', 'shop');
 Route::view('/product', 'product');
-Route::view('/cart', 'cart');
+// Route::view('/cart', 'cart');
 Route::view('/checkout', 'checkout');
 Route::view('/thankyou', 'thankyou');
 
 //landing page
 Route::get('/', 'LandingPageController@index')->name('landing-page');
-//shop page
+// * Shop page
 Route::get('/shop','ShopController@index')->name('shop.index');
-//product page
 Route::get('/shop/{product}','ShopController@show')->name('shop.show');
+
+// * Cart
+Route::get("/cart",'CartController@index')->name('cart.index');
+Route::post("/cart",'CartController@store')->name('cart.store');
+Route::delete("/cart/{product}",'CartController@destroy')->name('cart.destroy');
+Route::post("/cart/switchToSaveForLater/{product}",'CartController@switchToSaveForLater')->name('cart.switchToSaveForLater');
+
+// * saveForLater
+Route::delete('/saveForLater/{product}', 'saveForLaterController@destroy')->name('saveForLater.destroy');
+Route::post('/saveForLater/switchToCart/{product}','saveForLaterController@switchToCart')->name('saveForLater.switchToCart');
+
+//empty 
+Route::get('empty',function() {
+    Cart::destroy();
+    Cart::instance('saveForLater')->destroy();
+});
 
