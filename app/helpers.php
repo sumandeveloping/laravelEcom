@@ -7,3 +7,7 @@
        //$price = (double)$price;
         return "$".$price;
 }
+
+function setActiveCategory($categorySlug,$output = 'active') {
+        return request()->category == $categorySlug ? $output : '';
+}

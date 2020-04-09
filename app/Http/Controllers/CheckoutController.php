@@ -44,6 +44,9 @@ class CheckoutController extends Controller
         try {
             //code...
             //dd($request->all());
+            $contents = Cart::instance('default')->content()->map(function ($item) {
+                return $item->model->slug.", ".$item->qty;
+            })->values()->toJson();
             $stripe = Stripe::charges()->create([
                 'amount' => Cart::instance('default')->total(),
                 'currency' => 'INR',
@@ -51,8 +54,8 @@ class CheckoutController extends Controller
                 'description' => 'Order',
                 'receipt_email' => $request->email,
                 'metadata' => [
-                    // 'contents' => $contents,
-                    // 'quantity' => Cart::instance('default')->count()
+                    'contents' => $contents,
+                    'quantity' => Cart::instance('default')->count()
                 ]
             ]);
 

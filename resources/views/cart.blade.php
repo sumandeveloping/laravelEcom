@@ -28,7 +28,7 @@
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors as $error)
+                        @foreach ($errors->all() as $error)
                             <li>{{$error}}</li>
                         @endforeach
                     </ul>
@@ -43,7 +43,7 @@
                     @foreach (Cart::content() as $item)
                         <div class="cart-table-row">
                             <div class="cart-table-row-left">
-                                <a href="{{route('shop.show',$item->model->slug)}}"><img src="/img/macbook-pro.png" alt="item" class="cart-table-img"></a>
+                                <a href="{{route('shop.show',$item->model->slug)}}"><img src="{{ asset('img/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
                                 <div class="cart-item-details">
                                     <div class="cart-table-item"><a href="{{route('shop.show',$item->model->slug)}}">{{$item->name}}</a></div>
                                     <div class="cart-table-description">{{$item->model->details}}</div>
@@ -65,15 +65,20 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <select class="quantity">
-                                        <option selected="">1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="quantity" data-id="{{ $item->rowId }}">
+                                        @for ($i = 1; $i < 6; $i++)
+                                            <option {{ $item->qty == $i ? 'selected' : '' }}>{{$i}}</option>
+                                        @endfor
+                                    
+                                        {{-- <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
+                                        <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
+                                        <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
+                                        <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
+                                        <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option> --}}
                                     </select>
                                 </div>
-                                <div>{{$item->model->presentPrice()}}</div>
+                                {{-- <div>{{$item->model->presentPriceWithoutSymbol($item->qty)}}</div> --}}
+                                <div>{{presentPrice($item->subtotal())}}</div>
                             </div>
                         </div> <!-- end cart-table-row -->
                     @endforeach
@@ -181,5 +186,33 @@
 
     @include('partials.might-like')
 
-
 @endsection
+
+@section('extra-js')
+<script src="{{ asset('js/app.js') }}"></script>
+<script>
+    (function(){
+        //alert('hi');
+        const quantityEl = document.querySelectorAll('.quantity');
+        quantityEl.forEach(function(el) {
+            el.addEventListener('change', function(e) {
+                const rowId = e.target.dataset.id;
+
+                // * Axios calling
+                axios.patch(`cart/${rowId}`, {
+                    quantity: this.value
+                })
+                .then(function (response) {
+                    // console.log(response);
+                    window.location.href = '{{ route('cart.index') }}';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    window.location.href = '{{ route('cart.index') }}';
+                });
+            })
+        })
+    })();
+</script>
+@endsection
+

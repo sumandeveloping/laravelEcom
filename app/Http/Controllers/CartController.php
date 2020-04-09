@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -87,9 +88,25 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         //
+        // dd($request->all());
+        // * validation => CHECK VALIDATION in laravel docs
+        $validator = Validator::make($request->all(), [
+            'quantity' => 'required|between:1,5|numeric'
+        ]);
+
+        if($validator->fails()) {
+            session()->flash('errors',collect(['Quantity must be between 1 and 5']));
+            return response()->json(['success' => true],400); // 400 means bad http request
+        }
+
+        Cart::update($id,$request->quantity);
+
+        session()->flash('success_message','Quantity was updated successfully');
+        return response()->json(['success' => true]);
         
     }
 
