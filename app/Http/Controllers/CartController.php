@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -90,6 +90,7 @@ class CartController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**
@@ -106,6 +107,13 @@ class CartController extends Controller
         return back()->with('success_message',"Item has been removed from your cart");
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function switchToSaveForLater(Request $request,$id) {
         // $id = rowId of Cart item
         $item = Cart::Get($id);

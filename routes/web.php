@@ -22,11 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::view('/', 'landing-page');
 // Route::get('/', 'LandingPageController@index')->name('landing-page');
-Route::view('/shop', 'shop');
-Route::view('/product', 'product');
+// Route::view('/shop', 'shop');
+// Route::view('/product', 'product');
 // Route::view('/cart', 'cart');
-Route::view('/checkout', 'checkout');
-Route::view('/thankyou', 'thankyou');
+// Route::view('/checkout', 'checkout');
+// Route::view('/thankyou', 'thankyou');
 
 //landing page
 Route::get('/', 'LandingPageController@index')->name('landing-page');
@@ -43,6 +43,13 @@ Route::post("/cart/switchToSaveForLater/{product}",'CartController@switchToSaveF
 // * saveForLater
 Route::delete('/saveForLater/{product}', 'saveForLaterController@destroy')->name('saveForLater.destroy');
 Route::post('/saveForLater/switchToCart/{product}','saveForLaterController@switchToCart')->name('saveForLater.switchToCart');
+
+// * Checkout
+Route::get('/checkout','CheckoutController@index')->name('checkout.index');
+Route::post('/checkout','CheckoutController@store')->name('checkout.store');
+
+// * Confirmation
+Route::get('/thankyou','ConfirmationController@index')->name('confirmation.index');
 
 //empty 
 Route::get('empty',function() {

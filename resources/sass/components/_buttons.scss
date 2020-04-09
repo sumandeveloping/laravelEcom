@@ -23,6 +23,11 @@
     color: white !important;
     padding: 12px 40px;
 
+    &:disabled {
+        background: lighten($primary, 10%);
+        cursor: not-allowed;
+    }
+
     &:hover {
         background: darken($primary, 7%);
     }

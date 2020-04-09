@@ -1,5 +1,5 @@
 h1.checkout-heading {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .checkout-section {
@@ -10,11 +10,11 @@ h1.checkout-heading {
     margin: 40px auto 80px;
 
     .checkout-table-container {
-      margin-left: 124px;
+        margin-left: 124px;
     }
 
     h2 {
-      margin-bottom: 28px;
+        margin-bottom: 28px;
     }
 
     .checkout-table-row {
@@ -28,7 +28,8 @@ h1.checkout-heading {
             border-bottom: 1px solid $text-color-light;
         }
 
-        .checkout-table-row-left, .checkout-table-row-right {
+        .checkout-table-row-left,
+        .checkout-table-row-right {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -56,27 +57,62 @@ h1.checkout-heading {
         }
 
         .checkout-table-quantity {
-          border: 1px solid $text-color-light;
-          padding: 4px 12px;
-          margin-right: 5px;
+            border: 1px solid $text-color-light;
+            padding: 4px 12px;
+            margin-right: 5px;
         }
     }
 
     .checkout-totals {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid $text-color-light;
-      padding: 18px 0;
-      line-height: 2;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $text-color-light;
+        padding: 18px 0;
+        line-height: 2;
 
-      .checkout-totals-right {
-        text-align: right;
-      }
+        .checkout-totals-right {
+            text-align: right;
+        }
 
-      .checkout-totals-total {
+        .checkout-totals-total {
             font-weight: bold;
             font-size: 22px;
             line-height: 2.2;
         }
     }
+}
+
+// * STRIPE CUSTOMIZATION
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+    box-sizing: border-box;
+    // height: 40px;
+    padding: 16px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+#card-errors {
+    color: #fa755a;
+    font-size: 14px;
+    margin-top: 5px;
 }
