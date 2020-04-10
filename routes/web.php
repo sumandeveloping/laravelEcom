@@ -30,27 +30,31 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //landing page
 Route::get('/', 'LandingPageController@index')->name('landing-page');
-// * Shop page
+// * Shop page Controller
 Route::get('/shop','ShopController@index')->name('shop.index');
 Route::get('/shop/{product}','ShopController@show')->name('shop.show');
 
-// * Cart
+// * Cart Controller
 Route::get("/cart",'CartController@index')->name('cart.index');
 Route::post("/cart",'CartController@store')->name('cart.store');
 Route::patch('/cart/{product}','CartController@update')->name('cart.update'); // todo Cart qty update
 Route::delete("/cart/{product}",'CartController@destroy')->name('cart.destroy');
 Route::post("/cart/switchToSaveForLater/{product}",'CartController@switchToSaveForLater')->name('cart.switchToSaveForLater');
 
-// * saveForLater
+// * saveForLater Controller 
 Route::delete('/saveForLater/{product}', 'saveForLaterController@destroy')->name('saveForLater.destroy');
 Route::post('/saveForLater/switchToCart/{product}','saveForLaterController@switchToCart')->name('saveForLater.switchToCart');
 
-// * Checkout
+// * Checkout Controller
 Route::get('/checkout','CheckoutController@index')->name('checkout.index');
 Route::post('/checkout','CheckoutController@store')->name('checkout.store');
 
-// * Confirmation
+// * Confirmation Controller
 Route::get('/thankyou','ConfirmationController@index')->name('confirmation.index');
+
+// * Coupons Controller 
+Route::post('/coupon', 'CouponsController@store')->name('coupon.store');
+Route::delete('/coupon', 'CouponsController@destroy')->name('coupon.destroy');
 
 //empty 
 Route::get('empty',function() {
