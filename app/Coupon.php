@@ -12,6 +12,7 @@ class Coupon extends Model
     public function findByCode($code)
     {
         return self::where('code',$code)->first();
+
     }
 
     public function discount($total)

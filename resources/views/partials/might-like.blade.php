@@ -10,7 +10,6 @@
                     <div class="might-like-product-price">{{$product->presentPrice()}}</div>
                 </a>
             @endforeach
-
             
             
         </div>

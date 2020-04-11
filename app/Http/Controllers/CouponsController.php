@@ -44,5 +44,6 @@ class CouponsController extends Controller
         session()->forget(['coupon','discount']);
 
         return redirect()->route('checkout.index')->with('success_message','Coupon has been removed');
+
     }
 }

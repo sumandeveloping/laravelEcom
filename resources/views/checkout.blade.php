@@ -160,10 +160,11 @@
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" style="font-size:14px;">Remove</button>
-                            </form> <br>
+                            </form> <br> <hr>
+                            New Subtotal <br>
+                            
                         @endif
-                        <hr>
-                        New Subtotal <br>
+
                         Tax <br>
                         <span class="checkout-totals-total">Total</span>
 
@@ -176,7 +177,7 @@
                             <hr>
                             {{presentPrice($newSubtotal)}} <br>
                         @endif
-                        
+                        {{-- <br><br> --}}
                         {{presentPrice($newTax)}}<br>
                         <span class="checkout-totals-total">{{presentPrice($newTotal)}}</span>
 

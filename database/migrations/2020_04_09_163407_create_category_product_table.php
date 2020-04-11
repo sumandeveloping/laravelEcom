@@ -23,7 +23,7 @@ class CreateCategoryProductTable extends Migration
             
             // // connection with categories table
             $table->integer('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
 
             $table->timestamps();
         });
